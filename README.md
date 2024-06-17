@@ -1,34 +1,62 @@
-### Enhancing E-commerce Search with Multimodal GANs
+# FashionGAN_Multimodal_Search
 
-The goal of this project is to develop a GAN to enhance e-commerce search by synthesizing images from multimodal inputs (image + text).
+## Project Overview
 
-**Implementation Details:**
+In the dynamic world of e-commerce, finding the perfect outfit can be challenging. Traditional keyword-based searches often fall short in capturing nuanced preferences. Our project aims to revolutionize the fashion e-commerce search experience using deep learning, specifically Generative Adversarial Networks (GANs), to enhance search engine comprehension of user queries by incorporating both image and text inputs.
 
-- **Model Architecture:** The GAN architecture consists of a generator and discriminator. The generator uses BERT for text and CNN for images, combines features, and upscales via transpose CNN layers. The discriminator employs CNN layers, LeakyReLU activations, and a final Sigmoid layer.
+## Implementation Details
 
-- **Data Preprocessing:** The Fashion MNIST dataset is used for grayscale image generation. Images are scaled to the range [-1, 1] for consistency.
+### Model Architecture
+- **Generator**: Combines image and text features using a pre-trained BERT model for text encoding and convolutional layers for image features. Generates images from combined features.
+- **Discriminator**: Classifies images as real or fake using convolutional layers and LeakyReLU activation.
 
-- **Training:** The model is trained with adversarial training using Adam optimizers and binary cross-entropy loss. The training process monitors losses and accuracies, and sample images are generated at intervals.
+### Data Preprocessing
+- **Dataset**: Uses the Fashion IQ dataset containing fashion images and corresponding captions.
+- **Custom Dataset Class**: FashionDataset class for loading and preprocessing image-caption pairs with BERT tokenizer.
 
-- **Evaluation:** The model is evaluated on its ability to generate realistic images, using metrics such as loss, accuracy, and visual inspection of generated samples.
+### Training
+- **Setup**: Utilizes Adam optimizer and adversarial loss function (BCELoss).
+- **Training Strategies**: Includes Wasserstein GAN with gradient penalty, label smoothing, and a two-time scale update rule.
 
-- **Deployment:** The project is set up to run on Google Colab with TensorFlow and Matplotlib, with a local/server deployment option using a tkinter GUI for user interaction.
+### Evaluation
+- **Metrics**: Accuracy, loss, precision, recall, and F1 score are used to evaluate model performance.
+- **Testing**: The model is tested on a separate test dataset to assess generalization and overall accuracy.
 
-**Performance:**
+## Deployment
 
-- **Base Case:** The initial performance of the GAN is evaluated over 30,000 epochs with a batch size of 32, showing improved generation of fashion item images over time.
+The model is deployed locally using a Language Model (LLM) Chatbot integrated into a graphical user interface (GUI) created with tkinter.
 
-- **With Optimization Techniques:** Techniques such as hyperparameter tuning and GPU acceleration are applied to improve image quality and training efficiency.
+### Workflow
+1. **User Interaction**: Users input text messages describing fashion items.
+2. **Keyword Detection**: Chatbot detects keywords related to shopping from user messages.
+3. **Image Generation**: Pre-trained generator model creates images corresponding to detected keywords.
+4. **Image Display**: Generated images are displayed in the chat area of the GUI.
+5. **User Feedback**: Chatbot provides feedback by displaying detected keywords and generated images.
 
-- **Metrics:** The model's performance is evaluated using accuracy, loss, and visual quality of generated images.
+## Benefits
 
-**Code:**
+- **Improved User Experience**: Provides visual representations of fashion items based on text descriptions.
+- **Interactive Shopping Experience**: Creates an engaging shopping experience by generating images from user queries.
 
-You can find the code for the entire project in the `code` folder.
+## Novelty
 
-## Detailed Report
+- **Multimodal Approach**: Combines image and text inputs for more accurate search results.
+- **Conditional GANs**: Generates images that align with specific user queries.
+- **SynthTriplet GAN Architecture**: Uses triplet loss for optimizing product retrieval.
+- **Advanced Training Strategies**: Improves stability and quality of training.
 
-A comprehensive report detailing the model architecture, training process, evaluation metrics, and performance graphs is available in `report.pdf`.
+## GUI Design
+
+The chatbot interface features user-friendly design with distinct tabs for easy navigation, and an image upload option for sharing images within the chatbot.
+
+## Future Work
+
+The model requires further training to improve accuracy and generate more realistic images. A Google Colab A100 GPU has been purchased to accelerate the training process.
+
+## Repository
+
+- **Code**: Available in the `code` folder.
+- **Comprehensive Report**: Detailed report on model architecture, training process, evaluation metrics, and performance graphs available in `report.pdf`.
 
 For questions or feedback, please [email](mailto:gayatriwalke@gmail.com).
 Thank You
